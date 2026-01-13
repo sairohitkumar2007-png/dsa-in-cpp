@@ -1,0 +1,141 @@
+https://leetcode.com/problems/find-the-least-frequent-digit/description/?envType=problem-list-v2&envId=hash-table
+
+https://leetcode.com/problems/first-missing-positive/description/?envType=problem-list-v2&envId=hash-table
+
+https://leetcode.com/problems/contains-duplicate/description/?envType=problem-list-v2&envId=hash-table
+
+https://leetcode.com/problems/majority-element-ii/description/?envType=problem-list-v2&envId=hash-table
+
+https://leetcode.com/problems/word-ladder-ii/description/?envType=problem-list-v2&envId=hash-table
+class Solution {
+public:
+    int getLeastFrequentDigit(int n) {
+       int freq[10]={0};
+       while(n)
+       {
+          freq[n%10]++;
+          n=n/10;
+       }
+    int min=INT_MAX;
+    int key;
+    for(int i=0;i<10;i++)
+    {
+        if(freq[i]>0)
+        {
+            if(min>freq[i])
+            {
+            min=freq[i];
+            key=i;
+        }
+        }
+    }
+      return key;  
+      
+    }
+};
+
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        vector<int>ans;
+        for(int x:nums)
+        {
+            if(x>0)
+            ans.push_back(x);
+        }
+        sort(ans.begin(),ans.end());
+        int k=0;
+        if(ans[0]!=1)
+        return 1;
+        else
+        {
+        for(int i=1;i<ans.size();i++)
+        {
+            if((ans[i-1]+1) != ans[i])
+            {
+              k=ans[i-1]+1;
+              return k;
+            }
+            
+
+        }
+        }
+        return ans[ans.size()-1]+1;
+    }
+};
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        int k=nums.size();
+       unordered_set<int>s;
+        for(int x:nums)
+        {
+           s.insert(x);
+        }
+       int p=s.size();
+        return k!=p;
+    }
+};
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        map<int,int>freq;
+        int n=nums.size();
+        int k=floor(n/3);
+        for(int x:nums)
+        {
+            freq[x]++;
+        }
+        vector<int>ans;
+        for(auto it :freq)
+        {
+            if(it.second>k)
+            {
+                ans.push_back(it.first);
+            }
+
+        }
+        return ans;
+
+    }
+};
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        unordered_set<string>st(wordList.begin(),wordList.end());
+        if(!st.count(endWord))
+        return 0;
+        queue<string>q;
+        q.push(beginWord);
+        int level=1;
+        while(!q.empty())
+        {
+            int size=q.size();
+            while(size--)
+            {
+                string word=q.front();
+                q.pop();
+                if(word==endWord)
+                 return level;
+                 for(int i=0;i<word.size();i++)
+                 {
+                    char org=word[i];
+                    for(char ch='a';ch<='z';ch++)
+                    {
+                        word[i]=ch;
+                        if(st.count(word))
+                        {
+                            q.push(word);
+                            st.erase(word);
+                        }
+                    }
+                        word[i]=org;
+                    }
+                 }
+                 level++;
+            }
+            return 0;
+        }
+    
+    };
