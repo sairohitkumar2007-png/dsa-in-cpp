@@ -1,0 +1,114 @@
+https://leetcode.com/problems/sort-colors/description/
+
+https://leetcode.com/problems/majority-element/description/
+
+https://leetcode.com/problems/maximum-subarray/description/
+
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+
+https://leetcode.com/problems/rearrange-array-elements-by-sign/description/
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int count1=0;
+        int count2=0;
+        int count3=0;
+        for(int x:nums)
+        {
+            if(x==0)
+            count1++;
+            else if(x==1)
+            count2++;
+            else
+            count3++;
+        }
+        nums.clear();
+        for(int i=0;i<count1;i++)
+        {   
+            int k=0;
+            nums.push_back(k);
+        }
+        for(int j=0;j<count2;j++)
+        {  int k=1;
+            nums.push_back(k);
+        }
+        for(int k=0;k<count3;k++)
+        {
+            int p=2;
+            nums.push_back(p);
+        }
+       
+       
+    }
+};
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int k=floor(nums.size()/2);
+        unordered_map<int,int>mp;
+        for(int x:nums)
+         mp[x]++;
+         int y;
+         for(auto it:mp)
+         {
+            if(it.second>k)
+             {
+                y=it.first;
+                break;
+             }
+         }
+         return y;
+    }
+};
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int max=INT_MIN;
+        int sum=0;
+        for(int x:nums)
+        {   sum+=x;
+            if(sum>max)
+            max=sum;
+            if(sum<0)
+            sum=0;
+        }
+        return max;
+    }
+};
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        int pos = 0;
+        int neg = 1;
+        int n = nums.size();
+
+        vector<int> ans(n);
+
+        for(int x : nums) {
+            if(x > 0) {
+                ans[pos] = x;
+                pos += 2;
+            } else {
+                ans[neg] = x;
+                neg += 2;
+            }
+        }
+        return ans;
+    }
+};
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+      int profit;
+      int maxprofit=0;
+      int buy=prices[0];
+      for(int i=1;i<prices.size();i++)
+      {
+        profit=prices[i]-buy;
+        maxprofit=max(profit,maxprofit);
+        buy=min(buy,prices[i]);
+      }
+      return maxprofit;
+    }
+};
