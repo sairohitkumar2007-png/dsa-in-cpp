@@ -1,0 +1,91 @@
+class Solution {
+  public:
+    vector<int> findTwoElement(vector<int>& arr) {
+        int n = arr.size();
+        long long sum = 0, setsum = 0;
+
+        for (int x : arr)
+            sum += x;
+
+        unordered_set<int> s(arr.begin(), arr.end());
+        for (int x : s)
+            setsum += x;
+
+        long long k = sum - setsum;
+        long long expectedSum = (long long)n * (n + 1) / 2;
+        long long y = expectedSum - setsum;
+
+        return {(int)k, (int)y};
+    }
+};
+class Solution {
+  public:
+    long subarrayXor(vector<int> &arr, int k) {
+        int count=0;
+        int xr=0;
+        unordered_map<int,int>mp;
+        mp[0]=1;
+    for(int i=0;i<arr.size();i++)
+    {
+        xr^=arr[i];
+        int need=xr^k;
+        if(mp.count(need))
+        count+=mp[need];
+        mp[xr]++;
+    }
+        return count;
+    }
+};
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        for(int i=0;i<n;i++)
+        {
+            nums1[i+m]=nums2[i];
+        }
+        sort(nums1.begin(),nums1.end());
+    }
+};
+class Solution {
+  public:
+    int inversionCount(vector<int> &arr) {
+        // Code Here
+        int count=0;
+        int n=arr.size();
+        for(int i=0;i<n-1;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                if((i<j)&&arr[i]>arr[j])
+                 count++;
+            }
+        }
+        return count;
+    }
+};
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+       int k=m+n-1;
+       int i=m-1;;
+       int j=n-1;
+       while(i>=0 && j>=0)
+       {
+        if(nums1[i]>nums2[j])
+        {
+         nums1[k--]=nums1[i];
+         i--;
+        }
+        else
+        {
+            nums1[k--]=nums2[j];
+            j--;
+        }
+       }
+       while(j>=0)
+       {
+        nums1[k--]=nums2[j];
+        j--;
+       }
+    }
+};
