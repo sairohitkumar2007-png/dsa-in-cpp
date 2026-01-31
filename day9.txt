@@ -1,0 +1,105 @@
+
+https://leetcode.com/problems/remove-outermost-parentheses/
+
+https://leetcode.com/problems/reverse-words-in-a-string/
+
+https://leetcode.com/problems/largest-odd-number-in-string/
+
+https://leetcode.com/problems/longest-common-prefix/
+
+https://leetcode.com/problems/isomorphic-strings/
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        vector<string> ans;     
+        stringstream ss(s);
+        string word;
+
+        while(ss >> word)
+            ans.push_back(word); 
+
+        reverse(ans.begin(), ans.end());
+
+        string res = "";       
+        for(int i = 0; i < ans.size(); i++) {
+            res += ans[i];
+            if(i != ans.size() - 1)
+                res += " ";
+        }
+        return res;
+    }
+};
+class Solution {
+public:
+    string largestOddNumber(string num) {
+        for (int i = (int)num.size() - 1; i >= 0; i--) {
+            if ((num[i] - '0') % 2 == 0) {
+                num.erase(i, 1);
+            } else {
+                break;
+            }
+        }
+        return num;
+    }
+};
+class Solution {
+public:
+    string removeOuterParentheses(string s) {
+        int depth=0;
+        string ans="";
+        for(char c: s)
+        {
+            if(c=='(')
+            {
+              if(depth>0)
+              {
+                ans+=c;
+              }
+              depth++;
+
+            }
+            else
+            {
+                depth--;
+                if(depth>0)
+                {
+                    ans+=c;
+                }
+    
+            }
+        }
+        return ans;
+    }
+};
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string prefix=strs[0];
+        for(int i=1;i<strs.size();i++)
+        {  int  j=0;
+            while(j<strs[i].length()&&j<prefix.length()&&prefix[j]==strs[i][j])
+            {
+                j++;
+            }
+             prefix=prefix.substr(0,j);
+                if(prefix=="")
+                return "";
+        }
+        return prefix;
+    }
+};
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        int mp1[256]={0};
+        int mp2[256]={0};
+        for(int i=0;i<s.size();i++)
+        {
+            if(mp1[s[i]]!=mp2[t[i]])
+             return false;
+             mp1[s[i]]=mp2[t[i]]=i+1;
+        }
+        return true;
+    }
+};
