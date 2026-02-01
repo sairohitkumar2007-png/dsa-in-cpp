@@ -1,3 +1,12 @@
+https://leetcode.com/problems/rotate-string/description/
+
+https://leetcode.com/problems/valid-anagram/description/
+
+https://leetcode.com/problems/roman-to-integer/description/
+
+https://leetcode.com/problems/sort-characters-by-frequency/description/
+
+https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/description/
 class Solution {
 public:
     bool rotateString(string s, string goal) {
@@ -87,4 +96,5 @@ public:
         }
         return res;
     }
+
 };
