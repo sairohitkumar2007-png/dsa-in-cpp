@@ -1,0 +1,110 @@
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        if(s.size()!=goal.size())
+        return false;
+        string ans="";
+        for(int i=0;i<s.size();i++)
+        ans+=s[i];
+        for(int i=0;i<s.size();i++)
+        ans+=s[i];
+        if(ans.find(goal)!=string :: npos)
+        return true;
+        return false;
+        
+    }
+};
+class Solution {
+public:
+    string reverseWords(string s) {
+        vector<string> ans;     
+        stringstream ss(s);
+        string word;
+
+        while(ss >> word)
+            ans.push_back(word); 
+
+        reverse(ans.begin(), ans.end());
+
+        string res = "";       
+        for(int i = 0; i < ans.size(); i++) {
+            res += ans[i];
+            if(i != ans.size() - 1)
+                res += " ";
+        }
+        return res;
+    }
+};
+class Solution {
+    public:
+    int sum(string s)
+    {
+        int freq[26]={0};
+        for(int i=0;i<s.size();i++)
+          freq[s[i]-'a']++;
+          int min1=500;
+          int max1=1;
+          for(int i=0;i<26;i++)
+          {
+            if(freq[i]>0)
+            {
+             min1=min(min1,freq[i]);
+             max1=max(max1,freq[i]);
+            }
+          }
+          return max1-min1;
+    }
+public:
+    int beautySum(string s) {
+        int ans=0;
+        for(int i=0;i<s.size();i++)
+        {   string k="";
+            for(int j=i;j<s.size();j++)
+            {
+                k+=s[j];
+                ans+=sum(k);
+            }
+        }
+        return ans;
+    }
+};
+class Solution {
+    public:
+    bool pallindromecheck(string s)
+    {  
+        int n=s.size();
+        for(int i=0;i<n/2;i++)
+        {
+            if(s[i]!=s[n-i-1])
+              return false;
+        }
+        return true;
+    }
+
+    string longestPalindrome(string s) {
+        vector<string>ans;
+         string ans1="";
+        int max1=0;
+        for(int i=0;i<s.size();i++)
+        {   
+            string k="";
+            for(int j=i;j<s.size();j++)
+            {
+              k+=s[j];
+              if(pallindromecheck(k))
+              {
+              ans.push_back(k);
+               if(k.length()>max1)
+               {
+                max1=k.length();
+                ans1=k;
+               }
+              }
+            }
+        }
+       
+     
+        return ans1;
+        
+    }
+};
